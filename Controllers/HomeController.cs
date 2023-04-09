@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using project_basic_Authentication.Models;
 using System.Diagnostics;
 
 namespace project_basic_Authentication.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,14 +20,22 @@ namespace project_basic_Authentication.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "Admin,Superviser,employee")]
         public IActionResult Sales()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin,Superviser")]
 
         public IActionResult Shopping()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult Clients()
         {
             return View();
         }
